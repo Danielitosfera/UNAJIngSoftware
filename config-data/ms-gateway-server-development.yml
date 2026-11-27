@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: ms-pedido-service
+          uri: lb://ms-pedido-service
+          predicates:
+            - Path=/pedido/**
+        - id: ms-catalogo-service
+          uri: lb://ms-catalogo-service
+          predicates:
+            - Path=/catalogo/**
+        - id: ms-cliente-service
+          uri: lb://ms-cliente-service
+          predicates:
+            - Path=/cliente/**
